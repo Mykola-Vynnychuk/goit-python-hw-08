@@ -73,12 +73,16 @@ def birthdays_per_week(users):
         
         if start_of_week <= birthday <= end_of_week:
             weekday = weekday_names[birthday.weekday()]
+            if weekday == 'Sunday':
+                weekday = 'Monday'
             if weekday not in birthdays:
                 birthdays[weekday] = []
             birthdays[weekday].append(name)
     
-    for weekday, names in birthdays.items():
-        names_str = ', '.join(names)
-        print(f"{weekday}: {names_str}")
+    for weekday in weekday_names:
+        if weekday in birthdays:
+            names_str = ', '.join(birthdays[weekday])
+            print(f"{weekday}: {names_str}")
+
 
 birthdays_per_week(users)
